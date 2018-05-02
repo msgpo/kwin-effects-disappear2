@@ -3,7 +3,7 @@
 "Disappear 2" is a KWin effect that animates the disappearing of windows.
 Also, this effect is known as Glide 2 (from Compiz).
 
-## Installing
+## Installation
 
 ### Arch Linux
 
