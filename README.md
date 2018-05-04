@@ -10,6 +10,14 @@ Also, this effect is known as Glide 2 (from Compiz).
 For Arch Linux [kwin-effects-disappear2](https://aur.archlinux.org/packages/kwin-effects-disappear2/)
 is available in the AUR.
 
+### Fedora
+
+```sh
+sudo dnf copr enable zzag/kwin-effects
+sudo dnf refresh
+sudo dnf install kwin-effects-disappear2
+```
+
 ### From source
 
 ```sh
