@@ -59,12 +59,11 @@ void Disappear2Effect::prePaintScreen(KWin::ScreenPrePaintData& data, int time)
 {
     auto it = m_animations.begin();
     while (it != m_animations.end()) {
-        QTimeLine* t = it.value();
-        t->setCurrentTime(t->currentTime() + time);
-        if (t->currentTime() >= m_duration) {
+        Timeline& t = it.value();
+        t.update(time);
+        if (t.done()) {
             KWin::EffectWindow* w = it.key();
             w->unrefWindow();
-            delete t;
             it = m_animations.erase(it);
         } else {
             ++it;
@@ -92,7 +91,7 @@ void Disappear2Effect::paintWindow(KWin::EffectWindow* w, int mask, QRegion regi
 {
     const auto it = m_animations.constFind(w);
     if (it != m_animations.cend()) {
-        const qreal t = (*it)->currentValue();
+        const qreal t = (*it).value();
 
         data.setRotationAxis(Qt::XAxis);
         data.setRotationOrigin(QVector3D(0, w->height(), 0));
@@ -161,22 +160,15 @@ void Disappear2Effect::start(KWin::EffectWindow* w)
     w->setData(KWin::WindowClosedGrabRole, QVariant::fromValue(static_cast<void*>(this)));
 
     w->refWindow();
-    auto* t = new QTimeLine(m_duration, this);
-    t->setCurveShape(QTimeLine::EaseOutCurve);
-    m_animations.insert(w, t);
+
+    Timeline& t = m_animations[w];
+    t.setDuration(m_duration);
+    t.setEasingCurve(QEasingCurve::OutCurve);
 }
 
 void Disappear2Effect::stop(KWin::EffectWindow* w)
 {
-    if (m_animations.isEmpty()) {
-        return;
-    }
-    auto it = m_animations.find(w);
-    if (it == m_animations.end()) {
-        return;
-    }
-    delete *it;
-    m_animations.erase(it);
+    m_animations.remove(w);
 }
 
 void Disappear2Effect::markWindow(KWin::EffectWindow* w)
