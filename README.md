@@ -31,7 +31,7 @@ sudo apt install libkwin4-effect-disappear2
 git clone https://github.com/zzag/kwin-effects-disappear2.git
 cd kwin-effects-disappear2
 mkdir build && cd build
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make -jN
 sudo make install
 ```
