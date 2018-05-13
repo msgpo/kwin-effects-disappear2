@@ -30,6 +30,7 @@ target_link_libraries (kwin4_effect_disappear2
         KF5::ConfigGui
         KF5::CoreAddons
         KF5::WindowSystem
+        KWinEffects::GLUtils
         KWinEffects::KWinEffects
 )
 
