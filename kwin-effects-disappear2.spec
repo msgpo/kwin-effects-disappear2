@@ -1,5 +1,5 @@
 Name:           kwin-effects-disappear2
-Version:        1.2
+Version:        1.3
 Release:        1%{?dist}
 Summary:        Effect that animates the disappearing of windows
 
@@ -22,6 +22,7 @@ BuildRequires:  kf5-kwindowsystem-devel
 
 # KWin
 BuildRequires:  kwin-devel
+BuildRequires:  libepoxy-devel
 Requires:       kwin-libs
 
 %description
@@ -46,6 +47,9 @@ make %{?_smp_mflags} -C %{_target_platform}
 %{_kf5_qtplugindir}/kwin/effects/plugins/libkwin4_effect_disappear2.so
 
 %changelog
+* Mon May 14 2018 Vlad Zagorodniy <vladzzag@gmail.com> - 1.3-1
+- New upstream release
+
 * Sat May 05 2018 Vlad Zagorodniy <vladzzag@gmail.com> - 1.2-1
 - Update to upstream
 
