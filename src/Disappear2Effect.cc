@@ -41,6 +41,11 @@ Disappear2Effect::Disappear2Effect()
         this, &Disappear2Effect::start);
     connect(KWin::effects, &KWin::EffectsHandler::windowDeleted,
         this, &Disappear2Effect::stop);
+
+    const auto windows = KWin::effects->stackingOrder();
+    for (KWin::EffectWindow* w : windows) {
+        markWindow(w);
+    }
 }
 
 Disappear2Effect::~Disappear2Effect()
